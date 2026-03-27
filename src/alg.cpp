@@ -47,8 +47,19 @@ int countPairs1(int *arr, int len, int value) {
     return count;
 }
 
-// 2. Два указателя O(n) с обработкой повторов
+
+// 3. Бинарный поиск
 int countPairs2(int *arr, int len, int value) {
+    int count = 0;
+    for (int i = 0; i < len; i++) {
+        int target = value - arr[i];
+        count += countEqualInRange(arr, i + 1, len - 1, target);
+    }
+    return count;
+}
+
+// 2. Два указателя O(n) с обработкой повторов
+int countPairs3(int *arr, int len, int value) {
     int count = 0;
     int left = 0;
     int right = len - 1;
@@ -81,16 +92,6 @@ int countPairs2(int *arr, int len, int value) {
         } else {
             right--;
         }
-    }
-    return count;
-}
-
-// 3. Бинарный поиск
-int countPairs3(int *arr, int len, int value) {
-    int count = 0;
-    for (int i = 0; i < len; i++) {
-        int target = value - arr[i];
-        count += countEqualInRange(arr, i + 1, len - 1, target);
     }
     return count;
 }
